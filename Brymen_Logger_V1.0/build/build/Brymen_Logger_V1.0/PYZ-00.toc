@@ -1,5 +1,5 @@
 ('C:\\Users\\MilosevicA\\OneDrive - XAL Holding '
- 'GmbH\\Desktop\\build\\Brymen_Logger_V1.0\\PYZ-00.pyz',
+ 'GmbH\\Dokumente\\GitHub\\BrymenConnector21\\Brymen_Logger_V1.0\\src\\build\\Brymen_Logger_V1.0\\PYZ-00.pyz',
  [('__future__',
    'C:\\Users\\MilosevicA\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\__future__.py',
    'PYMODULE'),

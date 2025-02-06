@@ -86,7 +86,7 @@ def parse_all_measurements(message):
         parsed["low_battery"] = "LOW BAT" in message
     else:
         # If the message does not contain "MAIN:" we assume it is raw data.
-        parsed["raw"] = message
+        parsed["raw"] = ""
     return parsed
 
 class SerialReaderThread(threading.Thread):
@@ -119,7 +119,7 @@ class SerialReaderThread(threading.Thread):
                         
                         # Build a human-readable log string.
                         if "raw" in parsed_data:
-                            log_str = "Raw Data: " + parsed_data["raw"]
+                            log_str = ""
                         else:
                             flags_str = " ".join(parsed_data.get("flags", []))
                             main_val = parsed_data.get("main_value")
@@ -129,8 +129,7 @@ class SerialReaderThread(threading.Thread):
                             battery_str = "LOW BAT" if parsed_data.get("low_battery") else "OK"
                             log_str = (f"Flags: [{flags_str}] | "
                                        f"MAIN: {main_val} {main_unit} | "
-                                       f"AUX: {aux_val} {aux_unit} | "
-                                       f"Battery: {battery_str}")
+                                       f"AUX: {aux_val} {aux_unit}")
                         
                         # Update the GUI display with the main measurement if available.
                         if "main_value" in parsed_data and parsed_data["main_value"] is not None:
@@ -152,8 +151,7 @@ class SerialReaderThread(threading.Thread):
                                 ts = time.strftime("%Y-%m-%d %H:%M:%S")
                                 csv_line = (f"{ts},\"{flags_str}\","
                                             f"{main_val if main_val is not None else ''},\"{main_unit}\","
-                                            f"{aux_val if aux_val is not None else ''},\"{aux_unit}\","
-                                            f"{battery_str}\n")
+                                            f"{aux_val if aux_val is not None else ''},\"{aux_unit}\"\n")
                                 self.csv_file.write(csv_line)
                                 self.csv_file.flush()
             except Exception as e:
